@@ -1,8 +1,26 @@
 <!--  -->
 <template>
-  <div class="cat padding">
+  <div class="mine padding">
     <mt-header fixed  title="sellapp"></mt-header>
-    <div>11</div>
+    <div class="img">
+      <img src="../assets/logo.png" alt="">
+    </div>
+    <h4 class="bg_white p_all">
+      <span class="iconfont icon-xinxi"><i>我的订单</i></span>
+      <span class="fr">查看全部<i class="mint-cell-allow-right"></i></span>
+    </h4>
+    <div class="status">
+      <ul class="flex_cencer b_t">
+        <li v-for="item in status" :key="item.id" class="flex_cencer p_s bg_white">
+          <span :class="item.icon"></span>
+          <p>{{item.name}}</p>
+        </li>
+      </ul>
+    </div>
+    <h5 class="p_all bg_white mt_20">
+      收货地址
+      <span class="mint-cell-allow-right fr"></span>
+    </h5>
     <my-footer></my-footer>
   </div>
 </template>
@@ -11,9 +29,26 @@
 export default {
   data () {
     return {
-      banner: [],
-      tabs: [],
-      pro: {}
+      status: [{
+        name: '待付款',
+        icon: 'iconfont icon-xinxi',
+        id: '1'
+      },
+      {
+        name: '待发货',
+        icon: 'iconfont icon-xinxi',
+        id: '2'
+      },
+      {
+        name: '待收货',
+        icon: 'iconfont icon-xinxi',
+        id: '3'
+      },
+      {
+        name: '已签收',
+        icon: 'iconfont icon-xinxi',
+        id: '4'
+      }]
     };
   },
   created () {

@@ -14,7 +14,7 @@
       <div class="main">
         <ul class="flex">
           <li v-for="(item,index) in pro.items" :key="index" class="box mb_20">
-            <router-link :to="{name:'prodetails',params:'item.id'}">
+            <router-link :to="{name:'prodetails',params:{id:item.id}}">
               <img :src="item.url" alt="">
               <p>{{item.name}}</p>
             </router-link>
