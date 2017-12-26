@@ -1,6 +1,7 @@
 <!--  -->
 <template>
-  <div class="cat flex padding">
+  <div class="cat flex padding box">
+    <mt-header fixed  title="sellapp"></mt-header>
     <div class="left">
       <ul>
         <li v-for="(item,index) in cats" :key="index" class="text" :class="item.id==selected?'on':''" @click="navClick(item.id)">
@@ -69,29 +70,4 @@ export default {
 };
 </script>
 <style lang='stylus' >
-.cat
-  text-align center
-  height 100%
-  .left
-    height 100%
-    background white
-    overflow auto
-    width 30%
-    li
-      width 100%
-      padding .15rem .15rem
-      box-sizing border-box
-    .on
-      color red
-  .right
-    flex 1
-    ul
-      flex-wrap wrap
-      li
-        width 33.3%
-        padding 0 .1rem
-        img 
-          width 100%
-          height 1rem
-          
 </style>

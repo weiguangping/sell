@@ -1,7 +1,5 @@
 <template>
   <div id="app">
-    <mt-header fixed title="sellapp"></mt-header>
-    <!-- <img src="./assets/logo.png"> -->
     <router-view/>
   </div>
 </template>

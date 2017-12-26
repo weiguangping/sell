@@ -46,7 +46,7 @@ let det = {
     'sku|2': [{
         'id|+1': 0,
         'name': '@name',
-        'value': [{
+        'value|4': [{
             'id|+1': 0,
             'name': '@name'
         }]

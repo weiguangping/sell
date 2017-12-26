@@ -1,6 +1,7 @@
 <!--  -->
 <template>
   <div class="home padding padding">
+    <mt-header fixed  title="sellapp"></mt-header>
     <div class="banner">
       <mt-swipe :auto="4000">
         <mt-swipe-item v-for="(item,index) in banner" :key="index"><img :src="item.url" alt=""></mt-swipe-item>
@@ -64,34 +65,5 @@ export default {
 };
 </script>
 <style lang='stylus' scoped>
-.home
-  text-align center
-  .mint-swipe
-    width 100%
-    height 4rem
-    img
-      width 100%
-      height 100%
-  .list
-    width 100%
-    display flex
-    align-items center
-    justify-content center
-    .li
-      width 25%
-      height 1rem
-      .iconfont
-        font-size .4rem
-      p
-        margin-top .1rem
-      img 
-        width .3rem
-        height .3rem
-  .main
-    .pro
-      .li
-        img
-          width 100%
-          height 3rem 
-   
+
 </style>

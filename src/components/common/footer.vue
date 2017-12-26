@@ -13,8 +13,8 @@
             <span slot="icon" class="iconfont icon-xinxi"></span> 分类
           </mt-tab-item>
         </router-link>
-        <router-link to="/car" tag="div">
-          <mt-tab-item id="car">
+        <router-link to="/cart" tag="div">
+          <mt-tab-item id="cart">
             <span slot="icon" class="iconfont icon-xinxi"></span> 购物车
           </mt-tab-item>
         </router-link>
