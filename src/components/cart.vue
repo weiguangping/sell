@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { MessageBox } from 'mint-ui';
+import { MessageBox } from "mint-ui";
 export default {
   data () {
     return {
@@ -81,39 +81,52 @@ export default {
     confirmOrder () {
       if (this.checkboxModel.length < 1) {
         MessageBox({
-          title: '提示',
-          message: '请选择后再下单?',
+          title: "提示",
+          message: "请选择后再下单?",
           showCancelButton: false
-        })
+        });
       } else {
+        let items = [];
+        let newData = {};
+        this.checkboxModel.forEach(i => {
+          this.cartData.map(k => {
+            if (k.skuId == i) {
+              items.push(k);
+            }
+          });
+        });
+        newData.items = items;
+        newData.tolprice = this.tolPrice;
+        newData.sum = this.checkboxModel.length;
+        localStorage.setItem("confirmData", JSON.stringify(newData));
         this.$router.push({
-          name: 'home'
-        })
+          name: "confirmpro"
+        });
       }
     },
     sumPrice () {
       this.checkboxModel.forEach(i => {
         this.cartData.map(k => {
           if (k.skuId == i) {
-            this.tolPrice += (k.num * k.price);
+            this.tolPrice += k.num * k.price;
           }
-        })
+        });
       });
     },
     checkallClick () {
       if (!this.checkAll) {
         this.checkboxModel = [];
         this.cartData.map(i => {
-          this.checkboxModel.push(i.skuId)
-        })
+          this.checkboxModel.push(i.skuId);
+        });
       } else {
         this.checkboxModel = [];
       }
     },
     del (index) {
       MessageBox({
-        title: '提示',
-        message: '确定删除么?',
+        title: "提示",
+        message: "确定删除么?",
         showCancelButton: true
       }).then(res => {
         if (res == "confirm") {
@@ -122,10 +135,10 @@ export default {
             this.showPop = false;
           }, 1000);
           this.cartData.splice(index, 1);
-          localStorage.setItem('cartData', JSON.stringify(this.cartData));
+          localStorage.setItem("cartData", JSON.stringify(this.cartData));
         }
       });
-      console.log(index)
+      console.log(index);
     }
   }
 };

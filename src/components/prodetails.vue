@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div class="prodetails">
-    <mt-header fixed  title="sellapp">
+    <mt-header fixed title="sellapp">
       <span @click="back" slot="left">
         <mt-button icon="back">返回</mt-button>
       </span>
@@ -17,10 +17,12 @@
       <p class="mt_20 p_h price">￥{{det.minprice}}-{{det.maxprice}}</p>
     </div>
     <div class="img mt_20">
-      <img v-for="item in det.details" :key="item.id" :src="item" alt="">
+      <img v-for="(item,index) in det.details" :key="item.id" :src="item" alt="" class="wc-preview-img" v-lazy="item" @click="$preview($event, det.img, index)">
     </div>
     <div class="foot p_h box">
-      <router-link :to="{name:'cart'}"><span class="iconfont icon-gouwuche"></span></router-link>
+      <router-link :to="{name:'cart'}">
+        <span class="iconfont icon-gouwuche"></span>
+      </router-link>
       <div class="fotbtn fr">
         <button class="add" @click="showmask">加入购物车</button>
         <button class="buy" @click="showmask">立即购买</button>
@@ -57,10 +59,12 @@
           </div>
         </div>
         <div class="foot p_h box b_t">
-          <router-link :to="{name:'cart'}"><span class="iconfont icon-gouwuche"></span></router-link>
+          <router-link :to="{name:'cart'}">
+            <span class="iconfont icon-gouwuche"></span>
+          </router-link>
           <div class="fotbtn fr">
-            <button class="add" @click="addCar">加入购物车</button>
-            <button class="buy" @click="buys">立即购买</button>
+            <button class="add" @click="addCarorbuys(1)">加入购物车</button>
+            <button class="buy" @click="addCarorbuys(2)">立即购买</button>
           </div>
         </div>
       </div>
@@ -79,6 +83,7 @@ export default {
     };
   },
   created () {
+    console.log(this.$route.query);
     this.$ajax
       .get("det")
       .then(res => {
@@ -117,7 +122,7 @@ export default {
     showmask () {
       this.show = true;
     },
-    addCar () {
+    addCarorbuys (flag) {
       this.show = false;
       let skuId = "";
       let skuName = "";
@@ -144,33 +149,41 @@ export default {
         price,
         checked: false
       };
-      if (localStorage.cartData) {
-        let newarr = JSON.parse(localStorage.cartData);
-        let flag = true;
-        newarr.map(i => {
-          if (i.skuId == skuId) {
-            i.num += num;
-            flag = false;
+      if (flag == 1) {
+        if (localStorage.cartData) {
+          let newarr = JSON.parse(localStorage.cartData);
+          let flag = true;
+          newarr.map(i => {
+            if (i.skuId == skuId) {
+              i.num += num;
+              flag = false;
+            }
+            return i;
+          });
+          if (flag) {
+            newarr.push(data);
           }
-          return i;
-        });
-        if (flag) {
-          newarr.push(data);
+          localStorage.setItem("cartData", JSON.stringify(newarr));
+        } else {
+          let arr = [];
+          arr.push(data);
+          localStorage.setItem("cartData", JSON.stringify(arr));
         }
-        localStorage.setItem("cartData", JSON.stringify(newarr));
+        // console.log(skuId, skuName);
+        Toast({
+          message: "操作成功",
+          iconClass: "iconfont icon-xinxi"
+        });
       } else {
         let arr = [];
         arr.push(data);
-        localStorage.setItem("cartData", JSON.stringify(arr));
+        let newData = {};
+        newData.tolprice = num * price;
+        newData.items = arr;
+        newData.sum = num;
+        localStorage.setItem("confirmData", JSON.stringify(newData));
+        this.$router.push({ name: "confirmpro" });
       }
-      console.log(skuId, skuName);
-      Toast({
-        message: "操作成功",
-        iconClass: "iconfont icon-xinxi"
-      });
-    },
-    buys () {
-      this.show = false;
     },
     close () {
       this.show = false;

@@ -50,6 +50,10 @@ module.exports = {
                 options: vueLoaderConfig
             },
             {
+                test: /vue-preview.src.*?js$/,
+                loader: 'babel-loader'
+            },
+            {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 include: [resolve('src'), resolve('test')]

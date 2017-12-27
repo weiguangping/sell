@@ -5,7 +5,7 @@
     <div class="banner">
       <mt-swipe :auto="4000">
         <mt-swipe-item v-for="(item,index) in banner" :key="index">
-          <router-link class="db" :to="{name:'prodetails',params:{id:item.id}}">
+          <router-link class="db" :to="{name:'prodetails',query:{id:item.id}}">
             <img :src="item.url" alt="">
           </router-link>
         </mt-swipe-item>
@@ -14,7 +14,7 @@
     <div>
       <ul class="list bg_white mt_20">
         <li class="li p_s" v-for="(item,index) in tabs" :key="index">
-          <router-link :to='{name:"cat",params:{id:item.id}}'>
+          <router-link :to='{name:"cat",query:{id:item.id}}'>
             <img :src="item.url" alt="">
             <p class="text">{{item.name}}</p>
           </router-link>
@@ -25,7 +25,7 @@
       <h4 class="p_s bg_white mt_20">{{pro.title}}</h4>
       <div class="pro">
         <div class="li mb_20" v-for="(item,index) in pro.items" :key="index">
-          <router-link class="db" :to="{name:'prodetails',params:{id:item.id}}"><img :src="item.url" alt=""> </router-link>
+          <router-link class="db" :to="{name:'prodetails',query:{id:item.id}}"><img :src="item.url" alt=""> </router-link>
         </div>
       </div>
     </div>

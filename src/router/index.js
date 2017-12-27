@@ -5,6 +5,8 @@ import cat from '@/components/cat'
 import cart from '@/components/cart'
 import mine from '@/components/mine'
 import prodetails from '@/components/prodetails'
+import confirmpro from '@/components/confirmpro'
+import address from '@/components/address'
 
 Vue.use(Router)
 
@@ -35,6 +37,16 @@ export default new Router({
             path: '/prodetails',
             name: 'prodetails',
             component: prodetails
+        },
+        {
+            path: '/confirmpro',
+            name: 'confirmpro',
+            component: confirmpro
+        },
+        {
+            path: '/address',
+            name: 'address',
+            component: address
         }
     ]
 })
