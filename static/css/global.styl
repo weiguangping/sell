@@ -129,5 +129,31 @@ html
       text-align left 
     .tr
       text-align right
-.wc-slide img
-  width 100%
+    .wc-slide img
+      width 100%
+      height 5rem
+    .maskbg
+      position fixed
+      width 100%
+      height 100%
+      background rgba(0,0,0,0.3)
+      top 0
+      left 0
+      z-index 998
+    .maskmain
+      position fixed 
+      width 100%
+      min-height 6rem
+      bottom 0
+      left 0
+      background white
+      padding-bottom 0.8rem
+      z-index 999
+    .maskbg-enter-active,.maskbg-leave-active
+      transition opacity 0.3s
+    .maskbg-enter,.maskbg-leave-to 
+      opacity 0
+    .maskmain-enter-active,.maskmain-leave-active
+      transition all 0.1s
+    .maskmain-enter,.maskmain-leave-to 
+      transform translateY(100%)

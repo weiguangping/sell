@@ -64,21 +64,7 @@
         border-radius 1rem
         border 1px solid #985c0c
         margin-left .1rem
-  .maskbg
-    position fixed
-    width 100%
-    height 100%
-    background rgba(0,0,0,0.3)
-    top 0
-    left 0
   .maskmain
-    position fixed 
-    width 100%
-    min-height 6rem
-    bottom 0
-    left 0
-    background white
-    padding-bottom 0.8rem
     img 
       width 1.74rem
       height 1.74rem
@@ -136,14 +122,6 @@
         border 1px solid #cac5c5
         text-align center
         vertical-align middle
-  .maskbg-enter-active,.maskbg-leave-active
-    transition opacity 0.3s
-  .maskbg-enter,.maskbg-leave-to 
-    opacity 0
-  .maskmain-enter-active,.maskmain-leave-active
-    transition all 0.1s
-  .maskmain-enter,.maskmain-leave-to 
-    transform translateY(100%)
 /**********/
 .cat
   text-align center
@@ -299,5 +277,50 @@
     justify-content space-between
     span
       font-size .3rem
-      
-
+.address
+  .addresslist
+    li
+      >div
+        margin-top .1rem
+    p
+      margin-top .2rem
+    label
+      padding 0
+      margin-top .1rem
+      .mint-checkbox-core
+        width 16px
+        height 16px
+    .opt
+      margin-top .1rem
+      .iconfont 
+        font-size .4rem
+        margin 0 .1rem
+      span 
+        font-size .28rem
+        vertical-align middle
+  .btn
+    width 1.6rem 
+  .addressEdit
+    position fixed 
+    bottom 0
+    width 100%
+    select 
+      font-size .3rem
+      height .6rem
+      padding .1rem .2rem
+      display block 
+      margin-top .32rem
+    p  
+      font-size .3rem
+      height .6rem
+      padding .1rem .2rem
+      display block 
+      line-height .5rem
+      margin-top .2rem
+    .group
+      label 
+        font-size .3rem
+        margin-right .1rem
+      input
+        font-size .3rem
+  
