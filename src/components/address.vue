@@ -1,30 +1,34 @@
 <!--  -->
 <template>
   <div class="address padding">
-    <mt-header fixed title="sellapp"></mt-header>
+    <mt-header fixed title="sellapp">
+      <span @click="back" slot="left">
+        <mt-button icon="back">返回</mt-button>
+      </span>
+    </mt-header>
     <ul class="addresslist" v-if="address.length>0">
-      <li v-for="(item,index) in address" :key="index" class="bg_white p_all mt_20">
+      <li v-for="(item,index) in address" :key="index" class="bg_white p_all mt_20" @click.stop="selectdAddress(index)">
         <p>{{item.name}}
           <span class="fr">{{item.mobile}}</span>
         </p>
-        <p>{{item.detail}}</p>
+        <p>{{item.province}}{{item.city}}{{item.area}}{{item.detail}}</p>
         <div class="b_t">
-          <label class="mint-checklist-label dib">
-            <span class="mint-checkbox"><input type="checkbox" class="mint-checkbox-input" v-model="item.checked" @click="check(index)">
+          <label class="mint-checklist-label dib" @click.stop="check(index)">
+            <span class="mint-checkbox"><input type="checkbox" class="mint-checkbox-input" v-model="item.checked">
               <span class="mint-checkbox-core"></span>
             </span>
             <span>选择默认</span>
           </label>
           <div class="opt fr">
-            <span>
+            <span @click.stop="delAddress(index)">
               <i class="iconfont icon-xinxi"></i>删除</span>
-            <span>
+            <span @click.stop="editAddress(index)">
               <i class="iconfont icon-xinxi"></i>编辑</span>
           </div>
         </div>
       </li>
     </ul>
-    <div v-else class="tc mt_20">
+    <div class="tc mt_20">
       <button class="btn" @click="addAddress">新增地址</button>
     </div>
     <transition name="maskbg" mode="out-in">
@@ -39,14 +43,6 @@
           <mt-field label="手机号" type="number" placeholder="请输入手机号" v-model="mobile"></mt-field>
           <mt-cell title="地区" :value="addressValue" @click.native="selectAddress"></mt-cell>
           <div class="addr ov bg_white">
-            <!-- <div class="fl">
-              <p>省级</p>
-              <p>市区</p>
-              <p>县镇</p>
-            </div>
-            <div class="fl">
-              <v-distpicker @selected='selected' province="广东省" city="广州市" area="海珠区"></v-distpicker>
-            </div> -->
             <mt-field class="clear" label="详细地址" placeholder="请输入详细地址" v-model="detail"></mt-field>
             <div class="tc mt_20 mb_20">
               <button class="btn" @click="submit">确定</button>
@@ -62,6 +58,7 @@
 <script>
 import WeuiDistpicker from "weui-distpicker";
 import { MessageBox } from "mint-ui";
+import { Toast } from "mint-ui";
 export default {
   components: { WeuiDistpicker },
   data () {
@@ -73,15 +70,64 @@ export default {
       mobile: "",
       detail: "",
       show: false,
-      addressValue: "请选择地区"
+      addressValue: "请选择地区",
+      edit: false,
+      editIndex: -1,
+      flag: false
     };
   },
   created () {
+    if (this.$route.query.flag) {
+      this.flag = true;
+    }
     if (localStorage.address) {
       this.address = JSON.parse(localStorage.address);
     }
   },
   methods: {
+    back () {
+      this.$router.go(-1);
+    },
+    selectdAddress (index) {
+      if (this.flag) {
+        let selAddress = this.address[index];
+        localStorage.setItem("selAddress", JSON.stringify(selAddress));
+        this.$router.go(-1);
+      }
+    },
+    delAddress (index) {
+      MessageBox({
+        title: "提示",
+        message: "确定删除么?",
+        showCancelButton: true
+      }).then(res => {
+        if (res === "confirm") {
+          this.toast();
+          this.address.splice(index, 1);
+          if (this.address.length > 0) {
+            this.address[0].checked = true;
+          }
+          localStorage.setItem("address", JSON.stringify(this.address));
+        }
+      });
+    },
+    editAddress (index) {
+      this.showpop = true;
+      this.name = this.address[index].name;
+      this.mobile = this.address[index].mobile;
+      this.detail = this.address[index].detail;
+      this.addressValue =
+        this.address[index].province +
+        " " +
+        this.address[index].city +
+        " " +
+        this.address[index].area;
+      this.province = this.address[index].province;
+      this.city = this.address[index].city;
+      this.area = this.address[index].area;
+      this.edit = true;
+      this.editIndex = index;
+    },
     addressCancel () {
       this.show = false;
     },
@@ -94,13 +140,7 @@ export default {
       this.show = false;
     },
     selectAddress () {
-      console.log(1);
       this.show = true;
-    },
-    selected (data) {
-      this.area = data.area;
-      this.city = data.city;
-      this.province = data.province;
     },
     messageBox (message) {
       MessageBox({
@@ -129,28 +169,51 @@ export default {
       data.area = this.area;
       data.city = this.city;
       data.province = this.province;
-      console.log(data)
-      if (localStorage.address) {
+      if (localStorage.address && JSON.parse(localStorage.address).length > 0) {
         let address = JSON.parse(localStorage.address);
-        address.push(data);
+        if (this.edit) {
+          data.checked = address[this.editIndex].checked;
+          address[this.editIndex] = data;
+        } else {
+          address.push(data);
+        }
         localStorage.setItem("address", JSON.stringify(address));
+        this.address = address;
       } else {
         let arr = [];
-        arr.push(data)
+        data.checked = true;
+        arr.push(data);
+        this.address = arr;
         localStorage.setItem("address", JSON.stringify(arr));
       }
+      this.toast();
+      this.showpop = false;
+    },
+    toast () {
+      Toast({
+        message: "操作成功",
+        position: "middle",
+        duration: 1000
+      });
     },
     addAddress () {
+      this.name = "";
+      this.mobile = "";
+      this.detail = "";
+      this.addressValue = "请选择地区";
+      this.province = "";
+      this.area = "";
+      this.city = "";
       this.showpop = true;
+      this.edit = false;
+      this.editIndex = -1;
     },
     close () {
       this.showpop = false;
     },
     check (index) {
-      console.log(index);
       this.address.map((i, ind) => {
-        console.log(i, ind);
-        if (index == ind) {
+        if (index === ind) {
           i.checked = true;
         } else {
           i.checked = false;

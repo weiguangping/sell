@@ -7,6 +7,7 @@ import mine from '@/components/mine'
 import prodetails from '@/components/prodetails'
 import confirmpro from '@/components/confirmpro'
 import address from '@/components/address'
+import orderlist from '@/components/orderlist'
 
 Vue.use(Router)
 
@@ -47,6 +48,11 @@ export default new Router({
             path: '/address',
             name: 'address',
             component: address
+        },
+        {
+            path: '/orderlist',
+            name: 'orderlist',
+            component: orderlist
         }
     ]
 })

@@ -59,9 +59,21 @@ let det = {
         'url': '@image'
     }]
 }
+let orderlist = {
+    'page|+1': 1,
+    'items|10': [{
+        'id|+1': 0,
+        'name': '@name',
+        'skuName': '@name',
+        'img': ['@image'],
+        'price|0-99': 0,
+        'num|0-99': 0
+    }]
+}
 Mock.mock("pro", pro)
 Mock.mock("banner", banner)
 Mock.mock("cats", banner)
 Mock.mock("tabs", tabs)
 Mock.mock("msg2", msg2)
 Mock.mock("det", det)
+Mock.mock("orderlist", orderlist)

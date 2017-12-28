@@ -149,12 +149,12 @@ export default {
         price,
         checked: false
       };
-      if (flag == 1) {
+      if (flag === 1) {
         if (localStorage.cartData) {
           let newarr = JSON.parse(localStorage.cartData);
           let flag = true;
           newarr.map(i => {
-            if (i.skuId == skuId) {
+            if (i.skuId === skuId) {
               i.num += num;
               flag = false;
             }
