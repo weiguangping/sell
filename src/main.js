@@ -20,8 +20,8 @@ import wcView from 'wc-view';
 import 'wc-view/style.css';
 Vue.use(wcView);
 
-import VDistpicker from 'v-distpicker'
-Vue.component('v-distpicker', VDistpicker)
+import WeuiDistpicker from 'weui-distpicker'
+Vue.component('weui-distpicker', WeuiDistpicker)
 
 Vue.component('myFooter', MyFooter); // 使用要以my-Swipe
 // 定义成全局组件或过滤器，大家都能使用 开始
