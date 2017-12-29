@@ -140,6 +140,8 @@
       color red
   .right
     flex 1
+    height 100%
+    overflow auto
     ul
       flex-wrap wrap
       li
@@ -238,19 +240,23 @@
     .iconfont
       font-size .36rem
       i
+        font-size .3rem
+        vertical-align middle
         margin-left .1rem
   .mint-cell-allow-right
     margin-left .1rem
+    margin-top .06rem
   .mint-cell-allow-right::after
     position static 
     top auto 
     right auto 
     display inline-block
   .status 
-    .flex_cencer
+    .flex_center
       li
         width 25%
         flex-direction column 
+        text-align center
         p
           margin-top .1rem
   >h5
@@ -324,3 +330,31 @@
       background-image none
     .mint-cell-title
       max-width 96px
+.orderlist
+  height 100%
+  overflow scroll
+  .tabs
+    position fixed
+    top 40px
+    width 100%
+    z-index 999
+    .flex_center
+      flex-direction row
+      li
+        width 20%
+        text-align center
+        &.on
+          color red
+  .main
+    overflow scroll
+    padding-top .7rem
+    height 100%
+    box-sizing border-box
+    &::-webkit-scrollbar 
+      display: none;
+  .addresslist
+    li
+      overflow hidden
+
+      
+    

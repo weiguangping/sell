@@ -13,8 +13,8 @@
     </div>
     <div>
       <ul class="list bg_white mt_20">
-        <li class="li p_s" v-for="(item,index) in tabs" :key="index">
-          <router-link :to='{name:"cat",query:{id:item.id}}'>
+        <li class="li p_s" v-for="(item,index) in tabs" :key="index" v-if="index<4">
+          <router-link :to='{name:"cat",params:{id:item.id}}' :id='item.id'>
             <img :src="item.url" alt="">
             <p class="text">{{item.name}}</p>
           </router-link>
@@ -52,7 +52,7 @@ export default {
         console.log(error);
       });
     this.$ajax
-      .get("tabs")
+      .get("cats")
       .then(res => {
         this.tabs = res.data.items;
       })

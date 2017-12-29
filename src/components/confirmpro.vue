@@ -42,7 +42,7 @@
         <span class="price fr">￥{{confirmData.tolprice}}.00</span>
       </h5>
     </div>
-    <div class="foot p_all bg_white ov box flex_cencers">
+    <div class="foot p_all bg_white ov box flex_centers">
       <span>共计{{confirmData.sum}}件 合计:￥{{confirmData.tolprice}}.00</span>
       <button class="fr btn" @click="pay">去付款</button>
     </div>

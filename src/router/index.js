@@ -8,6 +8,7 @@ import prodetails from '@/components/prodetails'
 import confirmpro from '@/components/confirmpro'
 import address from '@/components/address'
 import orderlist from '@/components/orderlist'
+import test from '@/components/test'
 
 Vue.use(Router)
 
@@ -53,6 +54,11 @@ export default new Router({
             path: '/orderlist',
             name: 'orderlist',
             component: orderlist
+        },
+        {
+            path: '/test',
+            name: 'test',
+            component: test
         }
     ]
 })

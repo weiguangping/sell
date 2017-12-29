@@ -1,6 +1,15 @@
 import Mock from 'mockjs';
 let banner = {
-    'items|12': [{
+    'items|30': [{
+        'id|+1': 0,
+        'name': '@name',
+        'age|1-100': 100,
+        'color': '@color',
+        'url': '@image'
+    }]
+}
+let cats = {
+    'items|30': [{
         'id|+1': 0,
         'name': '@name',
         'age|1-100': 100,
@@ -19,7 +28,7 @@ let tabs = {
 }
 let pro = {
     'title': '@name',
-    'items|4': [{
+    'items|50': [{
         'id|+1': 0,
         'name': '@name',
         'age|1-100': 100,
@@ -60,8 +69,8 @@ let det = {
     }]
 }
 let orderlist = {
-    'page|+1': 1,
-    'items|10': [{
+    'page|0-3': 1,
+    'items|20': [{
         'id|+1': 0,
         'name': '@name',
         'skuName': '@name',
@@ -72,7 +81,7 @@ let orderlist = {
 }
 Mock.mock("pro", pro)
 Mock.mock("banner", banner)
-Mock.mock("cats", banner)
+Mock.mock("cats", cats)
 Mock.mock("tabs", tabs)
 Mock.mock("msg2", msg2)
 Mock.mock("det", det)

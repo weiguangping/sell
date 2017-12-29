@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <div class="address padding">
+  <div class="address">
     <mt-header fixed title="sellapp">
       <span @click="back" slot="left">
         <mt-button icon="back">返回</mt-button>

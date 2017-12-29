@@ -5,7 +5,7 @@
     <div class="img">
       <img src="../assets/logo.png" alt="">
     </div>
-    <router-link :to="{name:'orderlist',query:{type:1}}" class="db">
+    <router-link :to="{name:'orderlist',query:{type:0}}" class="db">
       <h4 class="bg_white p_all">
         <span class="iconfont icon-xinxi">
           <i>我的订单</i>
@@ -16,10 +16,12 @@
       </h4>
     </router-link>
     <div class="status">
-      <ul class="flex_cencer b_t">
-        <li v-for="item in status" :key="item.id" class="flex_cencer p_s bg_white">
-          <span :class="item.icon"></span>
-          <p>{{item.name}}</p>
+      <ul class="flex_center b_t">
+        <li v-for="item in status" :key="item.id" class="flex_center p_s bg_white">
+          <router-link :to="{name:'orderlist',query:{type:item.id}}">
+            <span :class="item.icon"></span>
+            <p>{{item.name}}</p>
+          </router-link>
         </li>
       </ul>
     </div>
