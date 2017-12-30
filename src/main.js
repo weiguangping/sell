@@ -23,13 +23,18 @@ Vue.use(wcView);
 import WeuiDistpicker from 'weui-distpicker'
 Vue.component('weui-distpicker', WeuiDistpicker)
 
-Vue.component('myFooter', MyFooter); // 使用要以my-Swipe
+import myHeader from '@components/common/header.vue';
+import mySwiper from '@components/common/swiper.vue';
+Vue.component('myFooter', MyFooter);
+Vue.component('myHeader', myHeader);
+Vue.component('mySwiper', mySwiper);
 // 定义成全局组件或过滤器，大家都能使用 开始
 Vue.filter('convertDate', function(value) {
     return Moment(value).format('YYYY-MM-DD');
 });
 Vue.use(Mint)
-    // Axios:挂载原型
+
+// Axios:挂载原型
 Vue.prototype.$ajax = Axios
 Vue.prototype.$mint = Mint
     // Axios:默认配置

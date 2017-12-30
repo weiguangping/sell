@@ -1,11 +1,7 @@
 <!--  -->
 <template>
   <div class="confirm padding">
-    <mt-header fixed title="sellapp">
-      <span @click="back" slot="left">
-        <mt-button icon="back">返回</mt-button>
-      </span>
-    </mt-header>
+    <my-header title='sell'></my-header>
     <div class="address">
       <router-link :to="{name:'address',query:{flag:1}}"  v-if="address.name">
         <div class="det ov bg_white p_all">
@@ -74,10 +70,6 @@ export default {
     }
   },
   methods: {
-    back () {
-      this.$router.go(-1);
-      localStorage.removeItem('selAddress');
-    },
     pay () {
       if (!this.address.name) {
         Toast({

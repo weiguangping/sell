@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div class="cat flex padding box">
-    <mt-header fixed  title="sellapp"></mt-header>
+    <mt-header fixed  title="sell"></mt-header>
     <div class="left" id="leftNav">
       <ul id="leftNavli" >
         <li v-for="(item,index) in cats" :id="'nav'+item.id" :data-id='item.id' :key="index" class="text" :class="item.id==selected?'on':''" @click="navClick(item.id)">
@@ -53,11 +53,6 @@ export default {
         console.log(error);
       });
   },
-  mounted () {
-    document.getElementById('leftNav').addEventListener('scroll', function (res) {
-      console.log(res)
-    })
-  },
   methods: {
     navClick (id) {
       this.selected = id
@@ -74,7 +69,7 @@ export default {
         this.pro = res.data;
         // document.getElementById('leftNav').scrollTop = 238;
         // console.log(document.getElementById(ele).scrollTop)
-        console.log(document.getElementById('leftNavli').clientHeight, document.getElementById('nav' + id).offsetTop, document.getElementById('leftNav').clientHeight)
+        // console.log(document.getElementById('leftNavli').clientHeight, document.getElementById('nav' + id).offsetTop, document.getElementById('leftNav').clientHeight)
         document.getElementById('leftNav').scrollTop = document.getElementById('nav' + id).offsetTop - 2 * document.getElementById('nav' + id).clientHeight;
       })
       .catch(error => {

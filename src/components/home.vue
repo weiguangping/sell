@@ -1,16 +1,8 @@
 <!--  -->
 <template>
   <div class="home padding padding">
-    <mt-header fixed title="sellapp"></mt-header>
-    <div class="banner">
-      <mt-swipe :auto="4000">
-        <mt-swipe-item v-for="(item,index) in banner" :key="index">
-          <router-link class="db" :to="{name:'prodetails',query:{id:item.id}}">
-            <img :src="item.url" alt="">
-          </router-link>
-        </mt-swipe-item>
-      </mt-swipe>
-    </div>
+    <mt-header fixed title="sell"></mt-header>
+    <my-swiper url='banner'></my-swiper>
     <div>
       <ul class="list bg_white mt_20">
         <li class="li p_s" v-for="(item,index) in tabs" :key="index" v-if="index<4">
@@ -43,14 +35,6 @@ export default {
     };
   },
   created () {
-    this.$ajax
-      .get("banner")
-      .then(res => {
-        this.banner = res.data.items;
-      })
-      .catch(error => {
-        console.log(error);
-      });
     this.$ajax
       .get("cats")
       .then(res => {

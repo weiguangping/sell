@@ -1,11 +1,7 @@
 <!--  -->
 <template>
   <div class="prodetails">
-    <mt-header fixed title="sellapp">
-      <span @click="back" slot="left">
-        <mt-button icon="back">返回</mt-button>
-      </span>
-    </mt-header>
+    <my-header title='sell'></my-header>
     <div class="lun">
       <mt-swipe :auto="4000">
         <mt-swipe-item v-for="(item,index) in det.img" :key="index"><img :src="item" alt=""></mt-swipe-item>
@@ -17,7 +13,7 @@
       <p class="mt_20 p_h price">￥{{det.minprice}}-{{det.maxprice}}</p>
     </div>
     <div class="img mt_20">
-      <img v-for="(item,index) in det.details" :key="item.id" :src="item" alt="" class="wc-preview-img" v-lazy="item" @click="$preview($event, det.img, index)">
+      <img v-for="(item,index) in det.details" :key="item.id" :src="item" alt="" class="wc-preview-img" v-lazy="item" @click="$preview($event, det.details, index)">
     </div>
     <div class="foot p_h box">
       <router-link :to="{name:'cart'}">
@@ -74,10 +70,12 @@
 
 <script>
 import { Toast } from "mint-ui";
+// vue中组件通信的对象
+import connect from './common/connect.js';
 export default {
   data () {
     return {
-      det: { img: ["1"] },
+      det: {},
       show: false,
       num: 1
     };
@@ -98,9 +96,6 @@ export default {
       });
   },
   methods: {
-    back () {
-      this.$router.go(-1);
-    },
     selGui (opid, id) {
       console.log(opid, id);
       this.det.sku = this.det.sku.map((i, j) => {
@@ -110,7 +105,7 @@ export default {
             // 把同一规格的 取消选中
             item.isSelected = false;
             // 选中当前
-            if (item.id == id) {
+            if (item.id === id) {
               item.isSelected = true;
             }
           });
@@ -174,6 +169,10 @@ export default {
           message: "操作成功",
           iconClass: "iconfont icon-xinxi"
         });
+        connect.$emit('addShopcart', this.num);
+        connect.$on('addShopcart', num => {
+          // console.log(num)
+        })
       } else {
         let arr = [];
         arr.push(data);

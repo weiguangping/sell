@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div class="cart padding">
-    <mt-header fixed title="sellapp"></mt-header>
+    <mt-header fixed title="sell"></mt-header>
     <div class="top bg_white p_s">
       <img src="../assets/logo.png" class="logo" alt="">
       <span>店铺</span>

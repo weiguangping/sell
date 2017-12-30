@@ -1,11 +1,7 @@
 <!--  -->
 <template>
   <div class="address">
-    <mt-header fixed title="sellapp">
-      <span @click="back" slot="left">
-        <mt-button icon="back">返回</mt-button>
-      </span>
-    </mt-header>
+    <my-header title='sell'></my-header>
     <ul class="addresslist" v-if="address.length>0">
       <li v-for="(item,index) in address" :key="index" class="bg_white p_all mt_20" @click.stop="selectdAddress(index)">
         <p>{{item.name}}

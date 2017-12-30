@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div class="mine padding">
-    <mt-header fixed title="sellapp"></mt-header>
+    <mt-header fixed title="sell"></mt-header>
     <div class="img">
       <img src="../assets/logo.png" alt="">
     </div>

@@ -1,11 +1,7 @@
 <!--  -->
 <template>
   <div class="orderDetails">
-    <mt-header fixed title="sellapp">
-      <span @click="back" slot="left">
-        <mt-button icon="back">返回</mt-button>
-      </span>
-    </mt-header>
+    <my-header title='sell'></my-header>
     <div class="top ov p_all bg_white">
       <span class="iconfont icon-xinxi fl"></span>
       <h4>{{orderDetails.state==1?'已取消':orderDetails.state==2?'待付款':orderDetails.state==3?'待发货':'已签收'}}</h4>
@@ -52,15 +48,12 @@ export default {
       this.$ajax
         .get("orderDetails")
         .then(res => {
-          console.log(res);
+          // console.log(res);
           this.orderDetails = res.data;
         })
         .catch(error => {
           console.log(error);
         });
-    },
-    back () {
-      this.$router.go(-1);
     }
   }
 };

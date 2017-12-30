@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div class="orderlist">
-    <mt-header fixed title="sellapp">
+    <mt-header fixed title="sell">
       <span @click="back" slot="left">
         <mt-button icon="back">返回</mt-button>
       </span>
@@ -55,12 +55,12 @@ export default {
   },
   methods: {
     loadTop () {
-      console.log('loadTop')
+      // console.log('loadTop')
       this.getList();
       this.$refs.loadmore.onTopLoaded();
     },
     loadBottom () {
-      console.log('loadBottom')
+      // console.log('loadBottom')
       this.getList(1);
       this.$refs.loadmore.onBottomLoaded();
     },
@@ -68,7 +68,7 @@ export default {
       this.$ajax
         .get("orderlist")
         .then(res => {
-          console.log(res);
+          // console.log(res);
           if (flag) {
             this.orderlist = this.orderlist.concat(res.data.items);
           } else {
