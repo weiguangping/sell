@@ -19,7 +19,7 @@
     <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :autoFill='false'>
       <ul class="addresslist">
         <li class="p_all b_t bg_white ov order" v-for="(item,index) in orderlist" :key="index">
-          <router-link class="db" :to="{name:'home',query:{id:item.id}}">
+          <router-link class="db" :to="{name:'orederDetails',query:{id:item.id}}">
             <img :src="item.img" alt="" class="fl">
             <h4>{{item.name}}</h4>
             <p>{{item.skuName}}</p>
@@ -41,7 +41,8 @@ export default {
     return {
       orderlist: [],
       select: 0,
-      allLoaded: false
+      allLoaded: false,
+      go: 1
     };
   },
   created () {
@@ -83,15 +84,27 @@ export default {
       this.getList();
     },
     back () {
-      this.$router.go(-1);
+      if (this.go === 1) {
+        this.$router.go(-1);
+      } else {
+        this.$router.push({name: 'home'});
+      }
     }
+  },
+  beforeRouteEnter (to, from, next) {
+    let go = 1;
+    if (from.name === 'confirmpro') {
+      go = 2;
+    } else {
+      go = 1;
+    }
+    // console.log(to, from)
+    next(vm => {
+            // 通过 `vm` 访问组件实例
+      vm.go = go;
+    })
   }
 };
 </script>
 <style>
-.scroll-wrapper li{
-    line-height: 120px;
-    font-size: 60px;
-    text-align: center;
-}
 </style>

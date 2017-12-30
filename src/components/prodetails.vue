@@ -83,11 +83,11 @@ export default {
     };
   },
   created () {
-    console.log(this.$route.query);
+    // console.log(this.$route.query);
     this.$ajax
       .get("det")
       .then(res => {
-        console.log(res);
+        // console.log(res);
         res.data.sku.map(i => {
           i.value[0].isSelected = true;
         });
@@ -105,7 +105,7 @@ export default {
       console.log(opid, id);
       this.det.sku = this.det.sku.map((i, j) => {
         console.log(i, j);
-        if (i.id == opid) {
+        if (i.id === opid) {
           i.value.map((item, index) => {
             // 把同一规格的 取消选中
             item.isSelected = false;

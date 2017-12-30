@@ -51,11 +51,13 @@
 
 <script>
 import { Toast } from "mint-ui";
+import { MessageBox } from 'mint-ui';
 export default {
   data () {
     return {
       address: {},
-      confirmData: {}
+      confirmData: {},
+      clear: 2
     };
   },
   created () {
@@ -82,8 +84,47 @@ export default {
           message: "请选择地址"
         });
       } else {
+        MessageBox({
+          title: '提示',
+          message: '确定付款?',
+          showCancelButton: true
+        }).then(res => {
+          if (res === 'confirm') {
+            Toast({
+              message: "付款成功"
+            });
+            if (this.clear === 1) {
+              let cartData = JSON.parse(localStorage.cartData);
+              this.confirmData.items.map(i => {
+                cartData.map((k, index) => {
+                  if (k.skuId === i.skuId) {
+                    cartData.splice(index, 1);
+                  }
+                  return k;
+                })
+              })
+              localStorage.setItem('cartData', JSON.stringify(cartData));
+            }
+            setTimeout(() => {
+              this.$router.push({name: 'orderlist'})
+            }, 1800);
+          }
+        });
       }
     }
+  },
+  beforeRouteEnter (to, from, next) {
+    let clear = 1;
+    if (from.name === 'cart') {
+      clear = 1;
+    } else {
+      clear = 2;
+    }
+    // console.log(to, from)
+    next(vm => {
+            // 通过 `vm` 访问组件实例
+      vm.clear = clear;
+    })
   }
 };
 </script>

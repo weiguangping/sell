@@ -9,6 +9,7 @@ import confirmpro from '@/components/confirmpro'
 import address from '@/components/address'
 import orderlist from '@/components/orderlist'
 import test from '@/components/test'
+import orederDetails from '@/components/orederDetails'
 
 Vue.use(Router)
 
@@ -59,6 +60,11 @@ export default new Router({
             path: '/test',
             name: 'test',
             component: test
+        },
+        {
+            path: '/orederDetails',
+            name: 'orederDetails',
+            component: orederDetails
         }
     ]
 })

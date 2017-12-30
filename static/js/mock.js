@@ -5,7 +5,7 @@ let banner = {
         'name': '@name',
         'age|1-100': 100,
         'color': '@color',
-        'url': '@image'
+        'url': "@image('200x100', '#ff6600', '#FFF', 'png', 'img')"
     }]
 }
 let cats = {
@@ -14,7 +14,7 @@ let cats = {
         'name': '@name',
         'age|1-100': 100,
         'color': '@color',
-        'url': '@image'
+        'url': "@image('200x100', '#ff6600', '#FFF', 'png', 'img')"
     }]
 }
 let tabs = {
@@ -23,7 +23,7 @@ let tabs = {
         'name': '@name',
         'age|1-100': 100,
         'color': '@color',
-        'url': '@image'
+        'url': "@image('200x100', '#ff6600', '#FFF', 'png', 'img')"
     }]
 }
 let pro = {
@@ -33,7 +33,7 @@ let pro = {
         'name': '@name',
         'age|1-100': 100,
         'color': '@color',
-        'url': '@image'
+        'url': "@image('200x100', '#ff6600', '#FFF', 'png', 'img')"
     }]
 }
 let msg2 = {
@@ -42,7 +42,7 @@ let msg2 = {
         'name': '@name',
         'age|1-100': 100,
         'color': '@color',
-        'url': '@image'
+        'url': "@image('200x100', '#ff6600', '#FFF', 'png', 'img')"
     }]
 }
 let det = {
@@ -50,8 +50,8 @@ let det = {
     'det': '@name',
     'minprice|0-100': 0,
     'maxprice|0-100': 0,
-    'img|3': ['@image'],
-    'details|4': ['@image'],
+    'img|3': ["@image('200x100', '#ff6600', '#FFF', 'png', 'img')"],
+    'details|10': ["@image('200x100', '#ff6600', '#FFF', 'png', 'img')"],
     'sku|2': [{
         'id|+1': 0,
         'name': '@name',
@@ -65,7 +65,7 @@ let det = {
         'name': '@name',
         'age|1-100': 100,
         'color': '@color',
-        'url': '@image'
+        'url': "@image('200x100', '#ff6600', '#FFF', 'png', 'img')"
     }]
 }
 let orderlist = {
@@ -74,10 +74,29 @@ let orderlist = {
         'id|+1': 0,
         'name': '@name',
         'skuName': '@name',
-        'img': ['@image'],
+        'img': ["@image('200x100', '#ff6600', '#FFF', 'png', 'img')"],
         'price|0-99': 0,
         'num|0-99': 0
     }]
+}
+let orderDetails = {
+    'page|0-3': 1,
+    'items|3': [{
+        'id|+1': 0,
+        'name': '@name',
+        'skuName': '@name',
+        'img': ["@image('200x100', '#ff6600', '#FFF', 'png', 'img')"],
+        'price|0-99': 0,
+        'num|0-99': 0
+    }],
+    'name': '@name',
+    'details': '@county(true)',
+    'tolprice|1-9999': 0,
+    'issend|1': true,
+    'ordernumber': '@id',
+    'dan': '@id',
+    'mobile': /1\d{10}/,
+    'state|1-4': 0
 }
 Mock.mock("pro", pro)
 Mock.mock("banner", banner)
@@ -86,3 +105,4 @@ Mock.mock("tabs", tabs)
 Mock.mock("msg2", msg2)
 Mock.mock("det", det)
 Mock.mock("orderlist", orderlist)
+Mock.mock("orderDetails", orderDetails)
