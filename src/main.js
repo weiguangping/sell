@@ -34,6 +34,9 @@ Vue.filter('convertDate', function(value) {
 });
 Vue.use(Mint)
 
+import fastclick from 'fastclick'
+fastclick.attach(document.body)
+
 // Axios:挂载原型
 Vue.prototype.$ajax = Axios
 Vue.prototype.$mint = Mint
