@@ -29,8 +29,8 @@ Vue.component('myFooter', MyFooter);
 Vue.component('myHeader', myHeader);
 Vue.component('mySwiper', mySwiper);
 // 定义成全局组件或过滤器，大家都能使用 开始
-Vue.filter('convertDate', function(value) {
-    return Moment(value).format('YYYY-MM-DD');
+Vue.filter('convertDate', function (value) {
+  return Moment(value).format('YYYY-MM-DD');
 });
 Vue.use(Mint)
 
@@ -45,25 +45,25 @@ Vue.prototype.$mint = Mint
 Axios.defaults.baseURL = ''
 Axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 // Axios:拦截器操作loadding
-Axios.interceptors.request.use(function(config) {
+Axios.interceptors.request.use(function (config) {
     // 显示图标
-    Mint.Indicator.open({
-        text: '加载中...',
-        spinnerType: 'fading-circle'
+  Mint.Indicator.open({
+      text: '加载中...',
+      spinnerType: 'fading-circle'
     });
-    return config;
+  return config;
 });
-Axios.interceptors.response.use(function(config) {
+Axios.interceptors.response.use(function (config) {
     // 隐藏图标
-    Mint.Indicator.close();
+  Mint.Indicator.close();
     // 获取到config中的data，进行加工
-    return config;
+  return config;
 });
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-    el: '#app',
-    router,
-    render: c => c(App)
+  el: '#app',
+  router,
+  render: c => c(App)
 })
